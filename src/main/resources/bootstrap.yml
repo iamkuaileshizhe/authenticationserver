@@ -1,0 +1,28 @@
+spring:
+  application:
+    name: authentication-server
+  cloud:
+    config:
+        uri: http://192.168.1.158:8901
+
+    discovery:
+      client:
+        simple:
+          local:
+            service-id: config-service
+      enabled: true
+
+
+#根据spring.application.name到http://localhost:8901这个配置服务器查找对应的配置文件
+
+
+#配置优先查找  当配置客户端启动时，会绑定到服务器并使用远程属性源文件初始化上下文。 使用spring.cloud.config.uri指定配置服务器的路径
+#发现优先查找  配置服务器将注册到发现服务器，所有应用程序可以使用DiscoveryClient来定位配置服务器
+#spring.cloud.discovery.enabled=true开始自动发现配置服务 false关闭自动发现配置服务
+
+
+
+#  spring:
+#    cloud:
+#      bus:
+#        id=${vcap:application:name:${spring:application:name:application}}:${vcap:application:instance_index:${spring:cloud:config:profile:${local:server:port:${server:port:0}}}}:${vcap:application:instance_id:${random:value}}:

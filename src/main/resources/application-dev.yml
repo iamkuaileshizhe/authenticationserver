@@ -1,0 +1,18 @@
+
+server:
+  port: 8001
+eureka:
+  instance:
+    instance-id: trying:authentication-server:test001 #发现客户端的实例id
+    prefer-ip-address: true      #false 表示使用主机名进行地址访问；true表示根据IP进行地址重定向
+  client:
+    serviceUrl:
+      defaultZone: http://192.168.1.158:8801/eureka/
+spring:
+  rabbitmq:
+    host: 192.168.1.175
+    port: 5672
+    username: admin
+    password: 1qazxsw2
+
+
