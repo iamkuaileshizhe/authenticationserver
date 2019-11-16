@@ -7,10 +7,7 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
-import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
-import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
-import org.springframework.security.oauth2.provider.ClientDetailsService;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 /**
 * @Title: WebSecurityConfigurerAdapter
@@ -20,7 +17,6 @@ import org.springframework.security.oauth2.provider.ClientDetailsService;
 * @update
 */
 @Configuration
-//@EnableAuthorizationServer
 public class MyWebSecurityConfigurerAdapter extends WebSecurityConfigurerAdapter {
 
     @Override
@@ -42,8 +38,22 @@ public class MyWebSecurityConfigurerAdapter extends WebSecurityConfigurerAdapter
 
     @Override
     protected  void configure(AuthenticationManagerBuilder builder) throws Exception{
-        builder.userDetailsService(userDetailsService()).passwordEncoder(new BCryptPasswordEncoder());
-        builder.inMemoryAuthentication().passwordEncoder(new BCryptPasswordEncoder()).withUser("test").password(new BCryptPasswordEncoder().encode("123456")).roles("USER").and().withUser("trying").password(new BCryptPasswordEncoder().encode("123456")).roles("USER","ADMIN");
+        builder.userDetailsService(userDetailsService()).passwordEncoder(getPasswordEncoder());
+        builder.inMemoryAuthentication().passwordEncoder(getPasswordEncoder()).withUser("test").password(getPasswordEncoder().encode("123456")).roles("USER").and().withUser("trying").password(getPasswordEncoder().encode("123456")).roles("USER","ADMIN");
+    }
+
+
+    /**
+    * @Title:
+    * @Description: 获取加密对象
+    * @param
+    * @return
+    * @author huxx
+    * @date 2019/11/16 下午2:19
+    * @update
+    */
+    private PasswordEncoder getPasswordEncoder(){
+        return new BCryptPasswordEncoder();
     }
 
 }

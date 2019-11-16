@@ -7,7 +7,13 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
-
+/**
+* @Title: MyAuthorizationServerConfigurer
+* @Description: 集成spring security OAuth2的适配器
+* @author huxx
+* @date 2019/11/16 下午2:16
+* @update
+*/
 @Configuration
 public class MyAuthorizationServerConfigurer extends AuthorizationServerConfigurerAdapter {
     @Autowired
@@ -17,7 +23,7 @@ public class MyAuthorizationServerConfigurer extends AuthorizationServerConfigur
 
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws  Exception{
-        clients.inMemory().withClient("trying").secret("secret").authorizedGrantTypes("refresh_token","password","client_credentials").scopes("webclient","mobileclient");
+        clients.inMemory().withClient("trying").secret("{noop}secret").authorizedGrantTypes("refresh_token","password","client_credentials").scopes("webclient","mobileclient");
     }
 
     @Override
