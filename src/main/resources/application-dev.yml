@@ -7,12 +7,12 @@ eureka:
     prefer-ip-address: true      #false 表示使用主机名进行地址访问；true表示根据IP进行地址重定向
   client:
     serviceUrl:
-      defaultZone: http://192.168.1.158:8801/eureka/
+      defaultZone: http://192.168.1.208:8801/eureka/
 spring:
   rabbitmq:
-    host: 192.168.1.175
-    port: 5672
-    username: admin
+    host: 39.105.64.245
+    port: 25672
+    username: hchy
     password: 1qazxsw2
 
 
